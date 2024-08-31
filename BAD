@@ -1,1 +1,61 @@
-#SOON#
+#!/bin/bash
+
+_get_zlink () {
+    if [[ $UPSTREAM_REPO ]]
+    then
+        echo "https://github.com/${UPSTREAM_REPO}/archive/Bad.zip"
+    else
+        echo "https://github.com/Badhacker98/EAGLEPLUGIN/archive/Bad.zip" 
+    fi
+}
+
+_run_python_code() {
+    python3${pVer%.*} -c "$1"
+}
+
+_run_eaglepackgit() {
+    $(_run_python_code 'from git import Repo
+import sys
+OFFICIAL_UPSTREAM_REPO = "https://github.com/Badhacker98/EAGLEPLUGIN"
+ACTIVE_BRANCH_NAME = "Bad"
+repo = Repo.init()
+origin = repo.create_remote("temponame", OFFICIAL_UPSTREAM_REPO)
+origin.fetch()
+repo.create_head(ACTIVE_BRANCH_NAME, origin.refs[ACTIVE_BRANCH_NAME])
+repo.heads[ACTIVE_BRANCH_NAME].checkout(True) ')
+}
+
+_run_eaglegit() {
+    local repolink=$(_get_repolink)
+    $(_run_python_code 'from git import Repo
+import sys
+OFFICIAL_UPSTREAM_REPO="'$repolink'"
+ACTIVE_BRANCH_NAME = "'$UPSTREAM_REPO_BRANCH'" or "Bad"
+repo = Repo.init()
+origin = repo.create_remote("temponame", OFFICIAL_UPSTREAM_REPO)
+origin.fetch()
+repo.create_head(ACTIVE_BRANCH_NAME, origin.refs[ACTIVE_BRANCH_NAME])
+repo.heads[ACTIVE_BRANCH_NAME].checkout(True) ')
+}
+
+_start_bot () {
+    local zippath
+    zippath="EAGLEBOT.zip"
+    echo "  Downloading source code ..."
+    wget -q $(_get_zlink) -O "$zippath"
+    echo "  Unpacking Data ..."
+    EAGLEPATH=$(zipinfo -1 "$zippath" | grep -v "/.");
+    unzip -qq "$zippath"
+    echo "Done"
+    echo "  Cleaning ..."
+    rm -rf "$zippath"
+    _run_eaglepackgit
+    cd $EAGLEPATH
+    _run_eaglegit
+    python3 ../setup/updater.py ../requirements.txt requirements.txt
+    chmod -R 755 bin
+    echo "    UserBot    "
+    python3 -m Eaglebot
+}
+
+_start_bot
