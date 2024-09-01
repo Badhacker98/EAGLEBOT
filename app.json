@@ -9,8 +9,8 @@
     "productivity"
   ],
   "repository": "https://github.com/Badhacker98/EAGLEBOT",
-  "website": "#TODO",
-  "success_url": "#TODO",
+  "website": "#EAGLE",
+  "success_url": "#EAGLE",
   "env": {
     "ENV": {
       "description": "Set this to ANYTHING will enable heroku.",
