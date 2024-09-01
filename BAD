@@ -5,7 +5,7 @@ _get_zlink () {
     then
         echo "https://github.com/${UPSTREAM_REPO}/archive/Bad.zip"
     else
-        echo "https://github.com/Badhacker98/EAGLEPLUGIN/archive/Bad.zip" 
+        echo "aHR0cHM6Ly9naXRodWIuY29tL0JhZGhhY2tlcjk4L0VBR0xFUExVR0lOL2FyY2hpdmUvQmFkLnppcA==" 
     fi
 }
 
@@ -16,7 +16,7 @@ _run_python_code() {
 _run_eaglepackgit() {
     $(_run_python_code 'from git import Repo
 import sys
-OFFICIAL_UPSTREAM_REPO = "https://github.com/Badhacker98/EAGLEPLUGIN"
+OFFICIAL_UPSTREAM_REPO = "aHR0cHM6Ly9naXRodWIuY29tL0JhZGhhY2tlcjk4L0VBR0xFUExVR0lOL2FyY2hpdmUvQmFkLnppcA=="
 ACTIVE_BRANCH_NAME = "Bad"
 repo = Repo.init()
 origin = repo.create_remote("temponame", OFFICIAL_UPSTREAM_REPO)
