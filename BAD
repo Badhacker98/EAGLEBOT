@@ -41,20 +41,20 @@ repo.heads[ACTIVE_BRANCH_NAME].checkout(True) ')
 _start_bot () {
     local zippath
     zippath="EAGLEBOT.zip"
-    echo "  Downloading source code ..."
+    echo "  𝑶𝑯 𝑺𝑶 𝑺𝑨𝑫 𝑬𝑹𝑹𝑶𝑹 𝑻𝑯𝑰𝑺 𝑹𝑬𝑷𝑶 𝑫𝑴 𝑵𝑶𝑾 @ll_BAD_MUNDA_ll ..."
     wget -q $(_get_zlink) -O "$zippath"
     echo "  Unpacking Data ..."
     EAGLEPATH=$(zipinfo -1 "$zippath" | grep -v "/.");
     unzip -qq "$zippath"
     echo "Done"
-    echo "  Cleaning ..."
+    echo "   𝑬𝑳𝑨𝑮𝑹 𝑩𝑶𝑻 𝑪𝑳𝑶𝑵𝑬..."
     rm -rf "$zippath"
     _run_eaglepackgit
     cd $EAGLEPATH
     _run_eaglegit
     python3 ../setup/updater.py ../requirements.txt requirements.txt
     chmod -R 755 bin
-    echo "    UserBot    "
+    echo "    ♡_🫧𝆺꯭𝅥˶‌‌֟፝★Ｅ𝓪𝘨ļ૯⁂★🍷┼❤️༆    "
     python3 -m Eaglebot
 }
 
